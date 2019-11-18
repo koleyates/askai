@@ -53,6 +53,7 @@
                 <div class="page-inner">
                   <form action="#" id="form">
                       <input type="text" id="question" x-webkit-speech>
+                      <input type="submit" value="Submit">
                   </form>
                   
                   <div id="response"></div>
@@ -67,12 +68,15 @@
   </div>
 
   <script>
+    let question,buffer = "";
     document.getElementById("form").addEventListener('submit', function (event) {
-      var query = "Q:" + document.getElementById("question").value;
-      getData(query);
+      question = document.getElementById("question").value;
+      buffer = question;
+      getData(question);
       return false;      
     });
     function getData(data) {
+      data = "Q: " + data + "\n";
       var req = new Request('/api/data', {
         method: 'post',
         mode: 'cors',
@@ -88,16 +92,30 @@
           return response.json();
         }).then(function (jsonData) {
           // console.log(jsonData);
-          let answer = jsonData.sentences[0].value.trim();
-          answer = answer.replaceAll("A:", "");
-          var utterance = new SpeechSynthesisUtterance(answer);
-          var voices = window.speechSynthesis.getVoices();
-          utterance.voice = voices.filter(function(voice) { return voice.name == 'Google UK English Male'; })[0];
-          window.speechSynthesis.speak(utterance);
+          answer = jsonData.sentences[0].value;
+          buffer = buffer + answer;
+          if (!answer.trim().endsWith(".")
+            && !answer.trim().endsWith("!")
+            && !answer.trim().endsWith("?")) {
+            console.log(answer);
+            getData(buffer);
+          } else {
+            speak(buffer);
+            console.log(buffer);
+          }
           
         }).catch(function (err) {
           console.log("Oops, Something went wrong!", err);
         })
+    }
+    function speak(answer) {
+      if (answer.includes("A:")) {
+        answer = answer.split("A:")[1];
+      }
+      var utterance = new SpeechSynthesisUtterance(answer);
+      var voices = window.speechSynthesis.getVoices();
+      utterance.voice = voices.filter(function(voice) { return voice.name == 'Google UK English Male'; })[0];
+      window.speechSynthesis.speak(utterance);
     }
 
   </script>
