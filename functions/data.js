@@ -22,11 +22,11 @@ exports.handler = async (event, context) => {
         "temperature":1,
         "max_time":1 })
     });
-    const data     = await response.json();
+    const data = await response.json();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(data)
+      body: JSON.stringify({ "response": data.sentences[0].value })
     };
   } catch (err) {
     return {

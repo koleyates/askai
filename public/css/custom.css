@@ -22,24 +22,16 @@ form {
   padding: 20px;
 }
 
-@media (min-width: 48em) {
-  footer {
-    display: none;
-  }
+footer {
+  display: block;
+  background-color: #aaa;
+  text-align: center;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
-
-@media (max-width: 48em) {
-  .page-container {
-    padding: 40px 30px;
-  }
-
-  footer {
-    display: block;
-    background-color: #aaa;
-    text-align: center;
-    padding: 5px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
+footer a {
+  text-decoration: none;
+  color: black;
 }
