@@ -12,7 +12,9 @@ body {
 .pure-g {
   letter-spacing: normal;
 }
-
+.pure-form button[type=submit] {
+  margin: .7em;
+}
 .text-center,.si-wrapper {
   text-align: center;
   margin: auto;
