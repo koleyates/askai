@@ -29,6 +29,8 @@ function getData(data) {
       // console.log(jsonData);
       answer = jsonData.sentences[0].value;
       buffer = buffer + answer;
+      buffer = buffer.replace(" . ", ".");
+      buffer = buffer.replace(" , ", ",");
       document.getElementById("response").textContent = buffer.split("A:")[1];
       if (!answer.trim().endsWith(".")
         && !answer.trim().endsWith("!")
