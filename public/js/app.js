@@ -10,6 +10,15 @@ document.getElementById("form").addEventListener('submit', function (event) {
   return false;
 });
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+  document.getElementsByClassName("si-mic")[0].addEventListener("click", function(e){
+    let qbox = document.getElementById("question");
+    if (document.getElementById("question").value.length > 0) {
+      document.getElementById("question").value = "";
+    }
+  });
+});
+
 function getData(data) {
   data = "Q: " + data + "\n";
   var req = new Request('/api/data', {
