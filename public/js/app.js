@@ -9,7 +9,9 @@ document.getElementById("form").addEventListener('submit', function (event) {
   getData(question);
   return false;
 });
-
+document.getElementById("form").addEventListener('reset', function (event) {
+  document.getElementById("response").textContent = "";
+});
 document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementsByClassName("si-mic")[0].addEventListener("click", function (e) {
     let qbox = document.getElementById("question");
