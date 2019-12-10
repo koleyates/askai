@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
 
   try{
     body = JSON.parse(event.body);
-    const response = await fetch('https://transformer.huggingface.co/autocomplete/gpt2/xl', {
+    const response = await fetch('https://transformer.huggingface.co/autocomplete/gpt2/large', {
       method: 'post',
       mode: 'cors',
       redirect: 'follow',
