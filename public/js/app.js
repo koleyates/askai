@@ -24,20 +24,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function getData(data) {
   document.getElementById("loading").classList.remove("hidden");
   data = "Q: " + data + "\n";
-  fetch('/api/data', {
-      method: 'post',
+  fetch('http://jarvisai.gleeze.com:5000?data=' + data, {
+      method: 'get',
       mode: 'cors',
       redirect: 'follow',
       headers: {
         'Accept': 'application/json',
         "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify({
-        "context": data, 
-        "model_size":"gpt2/xl",
-        "top_p":0.9,
-        "temperature":1,
-        "max_time":1 })
+      }
   }).then(function (response) {
     return response.json();
   }).then(function (jsonData) {
